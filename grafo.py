@@ -20,7 +20,7 @@ class Grafo:
         self.guardar_nodo(origen)
         self.guardar_nodo(dest)
 
-        if (not origen in self.aristas):
+        if self.aristas.get(origen) is None:
             self.aristas[origen] = {dest : peso}
         else:    
             self.aristas[origen][dest] = peso

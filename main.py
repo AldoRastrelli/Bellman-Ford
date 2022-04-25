@@ -63,7 +63,6 @@ def encontrar_ciclos_negativos(grafo, destino):
 def main():
 
     grafo, destino  = obtener_grafo_destino_de(NOMBRE_ARCHIVO)
-    grafo.print()
     ciclo_neg, costo = encontrar_ciclos_negativos(grafo, destino)
     imprimir_resultado(ciclo_neg, costo)
 
