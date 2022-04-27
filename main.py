@@ -73,3 +73,14 @@ def main():
     imprimir_resultado(ciclo_neg, costo)
 
 main()
+
+
+# def test_errors():
+#     for n in range(30000):
+#         try:
+#             main()
+#         except:
+#             print("error")
+#             break
+
+# test_errors()
