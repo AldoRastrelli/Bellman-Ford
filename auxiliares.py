@@ -18,10 +18,10 @@ def obtener_distancias(grafo, destino):
     return [distancia_ant, distancia_nueva]
 
 def setear_hash_para(grafo):
-    hash_aristas = {}
+    hash_aristas_min = {}
     for nodo in grafo:
-        hash_aristas[nodo] = set()
-    return hash_aristas
+        hash_aristas_min[nodo] = ""
+    return hash_aristas_min
 
 def no_es_ultima_iteración(i,n):
     return i != (n-1)
@@ -36,7 +36,7 @@ def get_diferencias(distancia):
             diferentes.append(nodo)
     return diferentes
 
-def encontrar_ciclo_en(nodos_cambiados, hash_aristas):
+def encontrar_ciclo_en(nodos_cambiados, hash_aristas_min):
 
     # Toma el primer nodo de nodos_cambiados y lo organiza en formato de árbol con sus aristas.
     # Luego, recorre de forma postorder recursiva buscando que se repita el nodo inicial.
@@ -44,9 +44,8 @@ def encontrar_ciclo_en(nodos_cambiados, hash_aristas):
     for i in range(len(nodos_cambiados)):
         inicial = nodos_cambiados[i]
         res = []
-        aristas = hash_aristas[inicial]
-        for n in aristas:
-            res += postorder_encontrar_inicial(n, inicial, hash_aristas, [])
+        arista = hash_aristas_min[inicial]
+        res += postorder_encontrar_inicial(arista, inicial, hash_aristas_min, [])
         if esta_vacio(res):
             continue
         return res
@@ -73,16 +72,14 @@ def postorder_encontrar_inicial(actual, inicial, aristas, visitados):
 
     return res
 
-def calcular_costo_para(ciclo_negativo, grafo):
+def calcular_costo_para(ciclo_negativo, grafo, arista):
     costo = 0
     primer_nodo = ciclo_negativo[0]
     primero = primer_nodo
-    for i in range(1, len(ciclo_negativo)):
-        segundo = ciclo_negativo[i]
-        costo += grafo[primero][segundo]
+    for i in range(1, len(ciclo_negativo)+1):
+        segundo = arista[primero]
+        costo += grafo[segundo][primero]
         primero = segundo
-    
-    costo += grafo[segundo][primer_nodo]
     return costo
 
 def esta_vacio(lista):

@@ -1,3 +1,5 @@
+from ast import excepthandler
+from cgi import test
 import os
 import copy
 from auxiliares import *
@@ -22,12 +24,16 @@ def obtener_grafo_destino_de(archivo):
 
             except (TypeError, ValueError):
                 pass
+        
+    for n in grafo.nodos:
+        if grafo.aristas.get(n) is None:
+            grafo.aristas[n] = {}
 
     return grafo, destino
 
 def encontrar_ciclos_negativos(grafo, destino):
     cant_nodos = len(grafo.nodos)
-    hash_aristas = setear_hash_para(grafo.aristas)
+    hash_aristas_min = setear_hash_para(grafo.aristas)
     distancias = obtener_distancias(grafo,destino)
 
     for i in range(cant_nodos):
@@ -49,14 +55,14 @@ def encontrar_ciclos_negativos(grafo, destino):
 
                 if costo_min_anterior > costo_nuevo:
                     distancias[iteracion][arista] = costo_nuevo
-                    hash_aristas[v].add(arista)
+                    hash_aristas_min[arista] = v
 
     nodos_cambiados = get_diferencias(distancias)
-
     if esta_vacio(nodos_cambiados):
         return [], None
-    ciclo_negativo = encontrar_ciclo_en(nodos_cambiados, hash_aristas)
-    costo = calcular_costo_para(ciclo_negativo, grafo.aristas)
+    ciclo_negativo = encontrar_ciclo_en(nodos_cambiados, hash_aristas_min)
+
+    costo = calcular_costo_para(ciclo_negativo, grafo.aristas, hash_aristas_min)
 
     return ciclo_negativo, costo
 
