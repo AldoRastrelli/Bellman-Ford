@@ -45,7 +45,7 @@ def encontrar_ciclo_en(nodos_cambiados, hash_aristas_min):
             orden[nodo] = i
             nodo = hash_aristas_min[nodo]
             continue
-        
+        visitados.append(nodo)
         index = orden[nodo]
         return visitados[index:]
     
@@ -55,7 +55,7 @@ def calcular_costo_para(ciclo_negativo, grafo, arista):
     costo = 0
     primer_nodo = ciclo_negativo[0]
     primero = primer_nodo
-    for i in range(1, len(ciclo_negativo)+1):
+    for i in range(1, len(ciclo_negativo)):
         segundo = arista[primero]
         costo += grafo[segundo][primero]
         primero = segundo

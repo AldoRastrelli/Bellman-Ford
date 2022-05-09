@@ -63,7 +63,7 @@ def encontrar_ciclos_negativos(grafo, destino):
     ciclo_negativo = encontrar_ciclo_en(nodos_cambiados, hash_aristas_min)
 
     costo = calcular_costo_para(ciclo_negativo, grafo.aristas, hash_aristas_min)
-
+    ciclo_negativo.reverse()
     return ciclo_negativo, costo
 
 def main():
