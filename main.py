@@ -4,15 +4,16 @@ import os
 import copy
 from auxiliares import *
 from grafo import Grafo
+import sys
 
 NOMBRE_ARCHIVO = 'test.txt'
 
 def obtener_grafo_destino_de(archivo):
+
     lineas = [] 
-    dir_path = os.path.dirname(os.path.realpath(__file__))
     grafo = Grafo()
        
-    with open(dir_path + '/' +archivo) as aristas:
+    with open(archivo) as aristas:
         lineas = aristas.readlines()
         destino = lineas.pop(0).strip()
         for linea in lineas:
@@ -68,7 +69,14 @@ def encontrar_ciclos_negativos(grafo, destino):
 
 def main():
 
-    grafo, destino  = obtener_grafo_destino_de(NOMBRE_ARCHIVO)
+    comandos = sys.argv
+
+    if len(comandos) != 2:
+        return
+
+    archivo = comandos[1].lower()
+
+    grafo, destino  = obtener_grafo_destino_de(archivo)
     ciclo_neg, costo = encontrar_ciclos_negativos(grafo, destino)
     imprimir_resultado(ciclo_neg, costo)
 
