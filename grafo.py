@@ -1,7 +1,3 @@
-from re import A
-from site import addusersitepackages
-from tkinter import E
-
 class Grafo:
 
     aristas = {}

@@ -1,6 +1,4 @@
-from ast import excepthandler
 from cgi import test
-import os
 import copy
 from auxiliares import *
 from grafo import Grafo
@@ -34,7 +32,7 @@ def obtener_grafo_destino_de(archivo):
 
 def encontrar_ciclos_negativos(grafo, destino):
     cant_nodos = len(grafo.nodos)
-    hash_aristas_min = setear_hash_para(grafo.aristas)
+    hash_aristas_min = {}
     distancias = obtener_distancias(grafo,destino)
 
     for i in range(cant_nodos):

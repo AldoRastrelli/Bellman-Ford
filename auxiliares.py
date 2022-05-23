@@ -1,6 +1,4 @@
 from cmath import inf
-from dis import dis
-from sys import argv 
 ANTERIOR = 0
 ULTIMA = 1
 
@@ -16,10 +14,6 @@ def obtener_distancias(grafo, destino):
 
     distancia_nueva = {}
     return [distancia_ant, distancia_nueva]
-
-def setear_hash_para(grafo):
-    hash_aristas_min = {}
-    return hash_aristas_min
 
 def no_es_ultima_iteración(i,n):
     return i != (n-1)
